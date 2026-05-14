@@ -1,0 +1,59 @@
+{
+  "vpg": {
+    "general": {
+      "name": "api-test-vpg-tagged",
+      "description": "Created via the ZIC API quickstart, with default recovery tags",
+      "protectedRegion":  { "id": "REPLACE_ME_protected_region_id" },
+      "protectedAccount": { "id": "REPLACE_ME_protected_account_id" },
+      "recoveryRegion":   { "id": "REPLACE_ME_recovery_region_id" },
+      "recoveryAccount":  { "id": "REPLACE_ME_recovery_account_id" }
+    },
+    "protectedResources": {
+      "vms": [
+        { "id": "REPLACE_ME_aws_instance_id" }
+      ]
+    },
+    "replication": {
+      "sla": {
+        "rpo":      "00:05:00",
+        "rpoAlert": "00:10:00",
+        "history":  "1.00:00:00"
+      }
+    },
+    "recovery": {
+      "default": {
+        "network": {
+          "failover": {
+            "useDefaultNetwork": false,
+            "failoverNetwork": {
+              "virtualNetwork": { "id": "REPLACE_ME_vpc_id" },
+              "subnet":         { "id": "REPLACE_ME_subnet_id" },
+              "securityGroups": [ { "id": "REPLACE_ME_sg_id" } ]
+            }
+          },
+          "failoverTest": {
+            "useDefaultNetwork": false,
+            "failoverNetwork": {
+              "virtualNetwork": { "id": "REPLACE_ME_vpc_id" },
+              "subnet":         { "id": "REPLACE_ME_test_subnet_id" },
+              "securityGroups": [ { "id": "REPLACE_ME_sg_id" } ]
+            }
+          }
+        },
+        "keyPair":        { "keyName": "REPLACE_ME_keypair_name" },
+        "role":           { "roleName": null },
+        "tags": [
+          { "tagKey": "Environment", "tagValue": "DR-failover" },
+          { "tagKey": "CostCenter",  "tagValue": "ops-dr" },
+          { "tagKey": "ManagedBy",   "tagValue": "Zerto-ZIC" },
+          { "tagKey": "SourceVpg",   "tagValue": "api-test-vpg-tagged" }
+        ],
+        "launchTemplate": {
+          "failover":     { "launchTemplateId": null },
+          "failoverTest": { "launchTemplateId": null }
+        }
+      },
+      "vms": []
+    }
+  }
+}
